@@ -33,15 +33,15 @@ app.debug = True
 clients = list();
 
 # reference 1
-class Client:
-    def __init__(self):
-        self.queue = queue.Queue()
+# class Client:
+#     def __init__(self):
+#         self.queue = queue.Queue()
 
-    def put(self, v):
-        self.queue.put_nowait(v)
+#     def put(self, v):
+#         self.queue.put_nowait(v)
 
-    def get(self):
-        return self.queue.get()
+#     def get(self):
+#         return self.queue.get()
 
 
 class World:
@@ -115,7 +115,8 @@ def subscribe_socket(ws):
        websocket and read updates from the websocket '''
     # XXX: TODO IMPLEMENT ME
     # reference 1
-    client = Client()
+    # client = Client()
+    client = queue.Queue()
     clients.append(client)
 
     g = gevent.spawn(read_ws, ws, client)    
