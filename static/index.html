@@ -48,12 +48,15 @@
         function drawCircle(context,entity) {
             with(context) {
                 beginPath();                
-                lineWidth = 3;
+                lineWidth = 20;
                 var x = entity["x"];
                 var y = entity["y"];
                 //moveTo(x,y);
                 fillStyle = entity["colour"];
-                strokeStyle = fillStyle;
+                // strokeStyle = fillStyle;
+                strokeStyle = entity["colour"];
+                shadowBlur = entity["shadowBlur"];
+                shadowColor = entity["shadowColor"];
                 arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);  
                 stroke();                                
             }
@@ -61,10 +64,17 @@
 
         function prepEntity(entity) {
             if (!entity["colour"]) {
-                entity["colour"] = "#FF0000";
+                // entity["colour"] = "#FF0000";
+                entity["colour"] = "white";
             }
             if (!entity["radius"]) {
-                entity["radius"] = 50;
+                entity["radius"] = 10;
+            }
+            if (!entity["shadowBlur"]) {
+                entity["shadowBlur"] = 75;
+            }
+            if (!entity["shadowColor"]) {
+                entity["shadowColor"] = '#8A79E2';
             }
             return entity;
         }
@@ -243,15 +253,15 @@
         // Add the application specific mouse listeners!
         //XXX: TODO Make these prettier!
         mouse.mousedowners.push(function(x,y,clicked,e) {
-            addEntityWithoutName({'x':x,'y':y,'colour':'blue'});
+            addEntityWithoutName({'x':x,'y':y,'colour':'white'});
         });
 
         mouse.mouseuppers.push(function(x,y,clicked,e) {
-            addEntityWithoutName({'x':x,'y':y,'colour':'red'});
+            addEntityWithoutName({'x':x,'y':y,'colour':'pink'});
         });
 
         mouse.mousedraggers.push(function(x,y,clicked,e) {
-            addEntityWithoutName({'x':x,'y':y,'colour':'green',
+            addEntityWithoutName({'x':x,'y':y,'colour':'purple',
                                 'radius':10});
         });
 
