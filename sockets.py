@@ -82,7 +82,7 @@ myWorld = World()
 def set_listener( entity, data ):
     ''' do something with the update ! '''
     for client in clients:
-        client.put_nowait(json.dumps({entity:data}))
+        client.put(json.dumps({entity:data}))
 
 myWorld.add_set_listener( set_listener )
         
